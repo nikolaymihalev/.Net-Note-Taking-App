@@ -9,6 +9,5 @@ namespace Note_Taker
         {
             Engine.Run();
         }
-
     }
 }
