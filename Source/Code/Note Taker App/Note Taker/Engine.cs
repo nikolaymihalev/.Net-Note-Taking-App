@@ -4,28 +4,19 @@ namespace Note_Taker;
 
 public class Engine
 {
-    public static async void Run()
+    public static void Run()
     {
         using NoteTakerContext context = new NoteTakerContext();
         
         GetClientNotes(context);
         int cmd = GetClientCommand();
-        
-        if (cmd == 1)
+
+        switch (cmd)
         {
-            AddNote(context);
-        }
-        else if (cmd == 2)
-        {
-            Console.WriteLine(Sentences.WhichNote);
-            Console.WriteLine(Sentences.EnterTitle);
-            string title = Console.ReadLine();
-            var note= context.Notes.FirstOrDefault(n => n.Title == title);
-            
-            Console.WriteLine("Openning note!");
-            
-            Console.WriteLine($"Tittle: {note.Title}");
-            Console.WriteLine($"");
+            case 1 : AddNote(context);
+                break;
+            case 2: OpenNote(context);
+                break;
         }
     }
     static void GetClientNotes(NoteTakerContext context)
@@ -37,6 +28,7 @@ public class Engine
         }
         else
         {
+            Console.WriteLine("Your notes!");
             for (int i = 0; i < notes.Count; i++)
             {
                 Console.WriteLine($"{notes[i].Id-1}. {notes[i].Title}");
@@ -112,5 +104,21 @@ public class Engine
             Process = processId
         });
         context.SaveChanges();
+    }
+
+    static void OpenNote(NoteTakerContext context)
+    {
+        Console.WriteLine(Sentences.WhichNote);
+        Console.WriteLine(Sentences.EnterTitle);
+        string title = Console.ReadLine();
+        var note= context.Notes.FirstOrDefault(n => n.Title == title);
+        if (note is not null)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Openning note!");
+            Console.WriteLine($"Tittle: {note.Title}");
+            Console.WriteLine($"Description: {note.Description}");
+            Console.WriteLine($"Process: {note.ProcessNavigation.Name}");
+        }
     }
 }
