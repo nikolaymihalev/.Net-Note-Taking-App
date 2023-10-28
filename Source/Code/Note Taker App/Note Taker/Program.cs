@@ -5,10 +5,6 @@ namespace Note_Taker
 {
     internal class Program
     {
-        private const string DontHaveNotes = $"You don't have notes!";
-        private const string EnterCommand = "Enter command! Only number!";
-        private const string EnterChoices = "1- add; 2- open; 3- delete";
-        
         static void Main(string[] args)
         {
             using NoteTakerContext context = new NoteTakerContext();
@@ -16,7 +12,7 @@ namespace Note_Taker
             var notes = context.Notes.Include(n=>n.ProcessNavigation).ToList();
             if (notes.Count==0)
             {
-                Console.WriteLine(DontHaveNotes);
+                Console.WriteLine(Sentences.DontHaveNotes);
             }
             else
             {
@@ -25,9 +21,32 @@ namespace Note_Taker
                     Console.WriteLine($"{no.Id}{no.Title}");
                 }
             }
-            Console.WriteLine(EnterCommand);
-            Console.WriteLine(EnterChoices);
-            Console.ReadLine();
+
+            int cmd = GetClientCommand();
+
+            if (cmd == 1)
+            {
+                
+            }
+
+        }
+
+        static int GetClientCommand()
+        {
+            Console.WriteLine(Sentences.EnterCommand);
+            Console.WriteLine(Sentences.EnterChoices);
+            int cmd = int.Parse(Console.ReadLine());
+            if (cmd < 1 || cmd > 4)
+            {
+                while (cmd < 1 || cmd > 4)
+                {
+                    Console.WriteLine(Sentences.EnterCommand);
+                    Console.WriteLine(Sentences.EnterChoices);
+                    cmd = int.Parse(Console.ReadLine());
+                }
+            }
+
+            return cmd;
         }
     }
 }
