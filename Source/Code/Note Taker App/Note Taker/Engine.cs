@@ -19,6 +19,8 @@ public class Engine
                     break;
                 case 2: OpenNote(context);
                     break;
+                case 3: DeleteNote(context);
+                    break;
             }
         }
 
@@ -112,22 +114,53 @@ public class Engine
 
     static void OpenNote(NoteTakerContext context)
     {
-        Console.WriteLine(Sentences.WhichNote);
+        Console.WriteLine(Sentences.WhichNoteToOpen);
         Console.WriteLine(Sentences.EnterTitle);
         string title = Console.ReadLine();
         var note= context.Notes.FirstOrDefault(n => n.Title == title);
         if (note is not null)
         {
-            Console.WriteLine();
-            Console.WriteLine("Openning note!");
-            Console.WriteLine($"Tittle: {note.Title}");
-            Console.WriteLine($"Description: {note.Description}");
-            Console.WriteLine($"Process: {note.ProcessNavigation.Name}");
+            OpenningNote(note);
         }
         else
         {
             Console.WriteLine(Sentences.WrongeCmd);
             Console.WriteLine();
+        }
+    }
+
+    static void OpenningNote(Note note)
+    {
+        Console.WriteLine();
+        Console.WriteLine("Openning note!");
+        Console.WriteLine($"Tittle: {note.Title}");
+        Console.WriteLine($"Description: {note.Description}");
+        Console.WriteLine($"Process: {note.ProcessNavigation.Name}");
+        Console.WriteLine();
+
+    }
+
+    static void DeleteNote(NoteTakerContext context)
+    {
+        Console.WriteLine(Sentences.WhichNoteToDelete);
+        string title = Console.ReadLine();
+        var note= context.Notes.FirstOrDefault(n => n.Title == title);
+        if (note is not null)
+        {
+            OpenningNote(note);
+            Console.WriteLine(Sentences.SureDelete);
+            string answer = Console.ReadLine().ToLower();
+            if (answer == "yes")
+            {
+                context.Remove(note);
+                context.SaveChanges();
+                Console.WriteLine("Removed");
+            }
+            else
+            {
+                Console.WriteLine();
+                return;
+            }
         }
     }
 }
