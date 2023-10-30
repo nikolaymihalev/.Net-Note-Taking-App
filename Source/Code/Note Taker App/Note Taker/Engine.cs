@@ -137,7 +137,6 @@ public class Engine
         Console.WriteLine($"Description: {note.Description}");
         Console.WriteLine($"Process: {note.ProcessNavigation.Name}");
         Console.WriteLine();
-
     }
 
     static void DeleteNote(NoteTakerContext context)
@@ -155,12 +154,18 @@ public class Engine
                 context.Remove(note);
                 context.SaveChanges();
                 Console.WriteLine("Removed");
+                Console.WriteLine();
             }
             else
             {
                 Console.WriteLine();
                 return;
             }
+        }
+        else
+        {
+            Console.WriteLine(Sentences.WrongeCmd);
+            Console.WriteLine();
         }
     }
 }
