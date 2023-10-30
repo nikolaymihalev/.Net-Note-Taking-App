@@ -9,10 +9,11 @@ public class Sentences
     public const string EnterTitle = "Enter note's title!";
     public const string EnterDescription = "Enter note's description!";
     public const string EnterProcess = "Enter note's process!";
+    public const string Processes = "New / Waiting / Running / Done";
     public const string WhichNoteToOpen = "Which note do you want to open?";
     public const string WhichNoteToDelete = "Which note do you want to delete?";
     public const string WhichNoteToUpdate = "Which note do you want to update?";
-    public const string WhatToUpdate = "What do you want to update? (Title/ Description/ Proccess)";
+    public const string WhatToUpdate = "What do you want to update? (Title/ Description/ Process)";
     public const string WrongeCmd = "Wrong command! Try again!";
     public const string SureDelete = "Are you sure you want to delete? (yes/no)";
     public const string WantToContinue = "Do you want to continue updating? (yes/no)";

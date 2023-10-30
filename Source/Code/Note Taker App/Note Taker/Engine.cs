@@ -92,6 +92,7 @@ public class Engine
             while (process is null)
             {
                 Console.WriteLine(Sentences.EnterProcess);
+                Console.WriteLine(Sentences.Processes);
                 process = Console.ReadLine();
             }
         }
@@ -215,6 +216,7 @@ public class Engine
                         break;
                     case "process": 
                         Console.WriteLine(Sentences.EnterNewProc);
+                        Console.WriteLine(Sentences.Processes);
                         string process = Console.ReadLine();
                         int processId = -1;
                         var processes = context.Processes.ToList();
