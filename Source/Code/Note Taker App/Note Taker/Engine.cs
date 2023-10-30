@@ -189,47 +189,13 @@ public class Engine
                 switch (updatePart)
                 {
                     case "title":
-                        Console.WriteLine(Sentences.EnterNewTitle);
-                        note.Title = Console.ReadLine();
-                        context.SaveChanges();
+                        UpdateTitle(note,context);
                         break;
                     case "description":
-                        Console.WriteLine(Sentences.UpdateDescription);
-                        string type = Console.ReadLine().ToLower();
-                            if (type == "new")
-                            {
-                                Console.WriteLine(Sentences.EnterNewDesc);
-                                string desc = Console.ReadLine();
-                                note.Description = desc;
-                                context.SaveChanges();
-                            }
-                            else if (type == "add")
-                            {
-                                Console.WriteLine(Sentences.EnterAddition);
-                                string oldDesc = note.Description;
-                                string newDesc = Console.ReadLine();
-                                string desc = oldDesc + " " + newDesc;
-
-                                note.Description = desc;
-                                context.SaveChanges();
-                            }
+                        UpdateDescription(note,context);
                         break;
                     case "process": 
-                        Console.WriteLine(Sentences.EnterNewProc);
-                        Console.WriteLine(Sentences.Processes);
-                        string process = Console.ReadLine();
-                        int processId = -1;
-                        var processes = context.Processes.ToList();
-                        foreach (var pro in processes)
-                        {
-                            if (pro.Name == process)
-                            {
-                                processId = pro.Id;
-                            }
-                        }
-
-                        note.Process = processId;
-                        context.SaveChanges();
+                        UpdateProcess(note,context);
                         break;
             }
                 Console.WriteLine(Sentences.WantToContinue);
@@ -241,5 +207,53 @@ public class Engine
             Console.WriteLine(Sentences.WrongeCmd);
             Console.WriteLine();
         }
+    }
+
+    static void UpdateTitle(Note note,NoteTakerContext context)
+    {
+        Console.WriteLine(Sentences.EnterNewTitle);
+        note.Title = Console.ReadLine();
+        context.SaveChanges();
+    }
+
+    static void UpdateDescription(Note note,NoteTakerContext context)
+    {
+        Console.WriteLine(Sentences.UpdateDescription);
+        string type = Console.ReadLine().ToLower();
+        if (type == "new")
+        {
+            Console.WriteLine(Sentences.EnterNewDesc);
+            string desc = Console.ReadLine();
+            note.Description = desc;
+            context.SaveChanges();
+        }
+        else if (type == "add")
+        {
+            Console.WriteLine(Sentences.EnterAddition);
+            string oldDesc = note.Description;
+            string newDesc = Console.ReadLine();
+            string desc = oldDesc + " " + newDesc;
+
+            note.Description = desc;
+            context.SaveChanges();
+        }
+    }
+    static void UpdateProcess(Note note,NoteTakerContext context)
+    {
+        Console.WriteLine(Sentences.EnterNewProc);
+        Console.WriteLine(Sentences.Processes);
+        string process = Console.ReadLine();
+        int processId = -1;
+        var processes = context.Processes.ToList();
+        foreach (var pro in processes)
+        {
+            if (pro.Name == process)
+            {
+                processId = pro.Id;
+            }
+        }
+
+        note.Process = processId;
+        context.SaveChanges();
     }
 }
