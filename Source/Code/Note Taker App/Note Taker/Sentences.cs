@@ -16,4 +16,9 @@ public class Sentences
     public const string WrongeCmd = "Wrong command! Try again!";
     public const string SureDelete = "Are you sure you want to delete? (yes/no)";
     public const string WantToContinue = "Do you want to continue updating? (yes/no)";
+    public const string EnterNewTitle = "Enter new title!";
+    public const string EnterNewDesc = "Enter new description!";
+    public const string EnterNewProc = "Enter new process!";
+    public const string EnterAddition = "Enter your addition!";
+    public const string UpdateDescription = "Do you want to write a new one or will you add to this? (New / Add)";
 }

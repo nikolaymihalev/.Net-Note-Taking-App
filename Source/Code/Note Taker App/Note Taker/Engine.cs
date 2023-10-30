@@ -21,6 +21,8 @@ public class Engine
                     break;
                 case 3: DeleteNote(context);
                     break;
+                case 4: UpdateNote(context);
+                    break;
             }
         }
 
@@ -182,8 +184,52 @@ public class Engine
             while (answer != "no")
             {
                 Console.WriteLine(Sentences.WhatToUpdate);
-                string updatePart = Console.ReadLine();
-                
+                string updatePart = Console.ReadLine().ToLower();
+                switch (updatePart)
+                {
+                    case "title":
+                        Console.WriteLine(Sentences.EnterNewTitle);
+                        note.Title = Console.ReadLine();
+                        context.SaveChanges();
+                        break;
+                    case "description":
+                        Console.WriteLine(Sentences.UpdateDescription);
+                        string type = Console.ReadLine().ToLower();
+                            if (type == "new")
+                            {
+                                Console.WriteLine(Sentences.EnterNewDesc);
+                                string desc = Console.ReadLine();
+                                note.Description = desc;
+                                context.SaveChanges();
+                            }
+                            else if (type == "add")
+                            {
+                                Console.WriteLine(Sentences.EnterAddition);
+                                string oldDesc = note.Description;
+                                string newDesc = Console.ReadLine();
+                                string desc = oldDesc + " " + newDesc;
+
+                                note.Description = desc;
+                                context.SaveChanges();
+                            }
+                        break;
+                    case "process": 
+                        Console.WriteLine(Sentences.EnterNewProc);
+                        string process = Console.ReadLine();
+                        int processId = -1;
+                        var processes = context.Processes.ToList();
+                        foreach (var pro in processes)
+                        {
+                            if (pro.Name == process)
+                            {
+                                processId = pro.Id;
+                            }
+                        }
+
+                        note.Process = processId;
+                        context.SaveChanges();
+                        break;
+            }
                 Console.WriteLine(Sentences.WantToContinue);
                 answer = Console.ReadLine();
             }
