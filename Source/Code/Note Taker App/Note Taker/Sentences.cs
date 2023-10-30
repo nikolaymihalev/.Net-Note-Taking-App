@@ -11,6 +11,9 @@ public class Sentences
     public const string EnterProcess = "Enter note's process!";
     public const string WhichNoteToOpen = "Which note do you want to open?";
     public const string WhichNoteToDelete = "Which note do you want to delete?";
+    public const string WhichNoteToUpdate = "Which note do you want to update?";
+    public const string WhatToUpdate = "What do you want to update? (Title/ Description/ Proccess)";
     public const string WrongeCmd = "Wrong command! Try again!";
     public const string SureDelete = "Are you sure you want to delete? (yes/no)";
+    public const string WantToContinue = "Do you want to continue updating? (yes/no)";
 }

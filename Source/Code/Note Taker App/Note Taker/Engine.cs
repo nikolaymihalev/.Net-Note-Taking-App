@@ -166,6 +166,32 @@ public class Engine
         {
             Console.WriteLine(Sentences.WrongeCmd);
             Console.WriteLine();
+            return;
+        }
+    }
+
+    static void UpdateNote(NoteTakerContext context)
+    {
+        Console.WriteLine(Sentences.WhichNoteToUpdate);
+        string title = Console.ReadLine();
+        var note= context.Notes.FirstOrDefault(n => n.Title == title);
+        if (note is not null)
+        {
+            OpenningNote(note);
+            string answer = "";
+            while (answer != "no")
+            {
+                Console.WriteLine(Sentences.WhatToUpdate);
+                string updatePart = Console.ReadLine();
+                
+                Console.WriteLine(Sentences.WantToContinue);
+                answer = Console.ReadLine();
+            }
+        }
+        else
+        {
+            Console.WriteLine(Sentences.WrongeCmd);
+            Console.WriteLine();
         }
     }
 }
