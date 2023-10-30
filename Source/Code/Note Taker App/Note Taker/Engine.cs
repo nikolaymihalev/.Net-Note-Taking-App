@@ -7,17 +7,21 @@ public class Engine
     public static void Run()
     {
         using NoteTakerContext context = new NoteTakerContext();
-        
         GetClientNotes(context);
-        int cmd = GetClientCommand();
 
-        switch (cmd)
+        int cmd = -1;
+        while (cmd != 10)
         {
-            case 1 : AddNote(context);
-                break;
-            case 2: OpenNote(context);
-                break;
+            cmd = GetClientCommand();
+            switch (cmd)
+            {
+                case 1 : AddNote(context);
+                    break;
+                case 2: OpenNote(context);
+                    break;
+            }
         }
+
     }
     static void GetClientNotes(NoteTakerContext context)
     {
@@ -119,6 +123,11 @@ public class Engine
             Console.WriteLine($"Tittle: {note.Title}");
             Console.WriteLine($"Description: {note.Description}");
             Console.WriteLine($"Process: {note.ProcessNavigation.Name}");
+        }
+        else
+        {
+            Console.WriteLine(Sentences.WrongeCmd);
+            Console.WriteLine();
         }
     }
 }
