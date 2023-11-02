@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Note_Taker.DbModels;
+using ConsoleTables;
 namespace Note_Taker;
 
 public class Engine
@@ -38,7 +39,7 @@ public class Engine
 
     static void GetClientNotes(NoteTakerContext context)
     {
-        var notes = context.Notes.Include(n=>n.ProcessNavigation).ToList();
+        var notes = context.Notes.Include(n => n.ProcessNavigation).ToList();
         if (notes.Count==0)
         {
             Console.WriteLine(Sentences.DontHaveNotes);
@@ -46,10 +47,12 @@ public class Engine
         else
         {
             Console.WriteLine("Your notes!");
+            var table = new ConsoleTable("Title", "Description", "Process");
             for (int i = 0; i < notes.Count; i++)
             {
-                Console.WriteLine($"{notes[i].Id-1}. {notes[i].Title}");
+                table.AddRow(notes[i].Title, notes[i].Description, notes[i].ProcessNavigation.Name);
             }
+            table.Write();
         }
     }
 
