@@ -8,7 +8,7 @@ public class Sentences
     public const string AddChose = "You chose to add note! ";
     public const string EnterTitle = "Enter note's title!";
     public const string EnterDescription = "Enter note's description!";
-    public const string EnterProcess = "Enter note's process!";
+    public const string EnterProcess = "Enter note's process! (New / Running / Waiting / Done )";
     public const string Processes = "New / Waiting / Running / Done";
     public const string WhichNoteToOpen = "Which note do you want to open?";
     public const string WhichNoteToDelete = "Which note do you want to delete?";
