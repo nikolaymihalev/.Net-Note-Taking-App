@@ -6,6 +6,9 @@ public class Engine
 {
     public static void Run()
     {
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Clear();
         using NoteTakerContext context = new NoteTakerContext();
         GetClientNotes(context);
 
@@ -15,7 +18,7 @@ public class Engine
             cmd = GetClientCommand();
             switch (cmd)
             {
-                case 1 : AddNote(context);
+                case 1 :AddNote(context);
                     break;
                 case 2: OpenNote(context);
                     break;
