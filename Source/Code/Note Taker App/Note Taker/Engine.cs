@@ -6,9 +6,7 @@ public class Engine
 {
     public static void Run()
     {
-        Console.BackgroundColor = ConsoleColor.White;
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.Clear();
+        SetColorsForConsole();
         using NoteTakerContext context = new NoteTakerContext();
         GetClientNotes(context);
 
@@ -30,6 +28,14 @@ public class Engine
         }
 
     }
+
+    static void SetColorsForConsole()
+    {
+        Console.BackgroundColor = ConsoleColor.White;
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.Clear();
+    }
+
     static void GetClientNotes(NoteTakerContext context)
     {
         var notes = context.Notes.Include(n=>n.ProcessNavigation).ToList();
