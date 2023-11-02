@@ -274,6 +274,7 @@ public class Engine
     static void Exit()
     {
         Console.WriteLine("Quitting!");
+        System.Threading.Thread.Sleep(1000);
         Environment.Exit(1);
     }
 }
