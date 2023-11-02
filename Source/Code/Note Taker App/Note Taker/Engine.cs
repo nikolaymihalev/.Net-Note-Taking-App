@@ -1,3 +1,4 @@
+using System.Net.Mime;
 using Microsoft.EntityFrameworkCore;
 using Note_Taker.DbModels;
 using ConsoleTables;
@@ -25,9 +26,10 @@ public class Engine
                     break;
                 case 4: UpdateNote(context);
                     break;
+                case 5: Exit();
+                    break;
             }
         }
-
     }
 
     static void SetColorsForConsole()
@@ -61,9 +63,9 @@ public class Engine
         Console.WriteLine(Sentences.EnterCommand);
         Console.WriteLine(Sentences.EnterChoices);
         int cmd = int.Parse(Console.ReadLine());
-        if (cmd < 1 || cmd > 4)
+        if (cmd < 1 || cmd > 5)
         {
-            while (cmd < 1 || cmd > 4)
+            while (cmd < 1 || cmd > 5)
             {
                 Console.WriteLine(Sentences.EnterCommand);
                 Console.WriteLine(Sentences.EnterChoices);
@@ -267,5 +269,11 @@ public class Engine
 
         note.Process = processId;
         context.SaveChanges();
+    }
+
+    static void Exit()
+    {
+        Console.WriteLine("Quitting!");
+        Environment.Exit(1);
     }
 }
